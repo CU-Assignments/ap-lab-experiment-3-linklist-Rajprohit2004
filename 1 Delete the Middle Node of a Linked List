@@ -1,0 +1,26 @@
+
+class Solution {
+public:
+    ListNode* deleteMiddle(ListNode* head) {
+        if (!head || !head->next) {
+            // If there's only one node, return nullptr (delete the only node)
+            return nullptr;
+        }
+        
+        ListNode* slow = head;
+        ListNode* fast = head;
+        ListNode* prev = nullptr;  // To keep track of the node before slow
+        
+        // Move fast by 2 steps and slow by 1 step
+        while (fast && fast->next) {
+            fast = fast->next->next;
+            prev = slow;
+            slow = slow->next;
+        }
+        
+        // `slow` is now pointing to the middle node, remove it
+        prev->next = slow->next;
+        
+        return head;
+    }
+};
